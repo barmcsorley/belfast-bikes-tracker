@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belfast Bikes Predictor</title>
+    <!-- Leaftlet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="glass-panel">
+            <h1>Belfast Bikes <span class="highlight">AI</span></h1>
+            <p>Real-time Availability & Future Predictions</p>
+        </header>
+        
+        <main>
+            <div id="map" class="map-container"></div>
+            
+            <div id="sidebar" class="sidebar glass-panel hidden">
+                <button id="close-sidebar" class="close-btn">&times;</button>
+                <h2 id="station-name">Station Name</h2>
+                <div class="stat-card">
+                    <span class="label">Current Status</span>
+                    <span id="current-bikes" class="value">--</span>
+                    <span class="sub-label">bikes available</span>
+                </div>
+                
+                <div class="prediction-section">
+                    <h3>Future Availability</h3>
+                    <div class="input-group">
+                        <label>Predict for (Hours from now):</label>
+                        <input type="range" id="hour-slider" min="1" max="12" value="1">
+                        <span id="hour-display" class="slider-value">+1h</span>
+                    </div>
+                    <div class="stat-card prediction-card">
+                        <span class="label">Predicted</span>
+                        <span id="predicted-bikes" class="value">--</span>
+                        <span class="sub-label">estimated bikes</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="app.js"></script>
+</body>
+</html>
