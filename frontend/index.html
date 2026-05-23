@@ -8,36 +8,57 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
-        <header class="glass-panel">
-            <h1>Belfast Bikes <span class="highlight">AI</span></h1>
-            <p>Real-time Availability & Future Predictions</p>
+        <header class="glass-panel animate-fade-in" style="display: flex; justify-content: space-between; align-items: center; min-width: 340px;">
+            <div>
+                <h1>Belfast Bikes <span class="highlight">AI</span></h1>
+                <p>Real-time Availability & Future Predictions</p>
+            </div>
+            <div id="weather-widget" style="text-align: center; margin-left: 1rem;">
+                <div style="font-size: 1.5rem; line-height: 1;">--</div>
+                <div style="font-size: 0.85rem; color: var(--text-secondary);">--°C</div>
+            </div>
         </header>
         
         <main>
             <div id="map" class="map-container"></div>
             
             <div id="sidebar" class="sidebar glass-panel hidden">
-                <button id="close-sidebar" class="close-btn">&times;</button>
+                <button id="close-sidebar" class="close-btn" aria-label="Close sidebar">&times;</button>
                 <h2 id="station-name">Station Name</h2>
-                <div class="stat-card">
-                    <span class="label">Current Status</span>
-                    <span id="current-bikes" class="value">--</span>
-                    <span class="sub-label">bikes available</span>
+                
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <span class="label">Current</span>
+                        <span id="current-bikes" class="value">--</span>
+                        <span id="capacity-display" class="sub-label">/ -- capacity</span>
+                    </div>
+                </div>
+
+                <!-- Chart container for past 24h & future 12h -->
+                <div class="chart-section">
+                    <h3>Availability & Forecast</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="availability-chart"></canvas>
+                    </div>
                 </div>
                 
                 <div class="prediction-section">
-                    <h3>Future Availability</h3>
+                    <h3>Forecast Simulation</h3>
                     <div class="input-group">
-                        <label>Predict for (Hours from now):</label>
-                        <input type="range" id="hour-slider" min="1" max="12" value="1">
-                        <span id="hour-display" class="slider-value">+1h</span>
+                        <label for="hour-slider">Predict for (Hours from now):</label>
+                        <div class="slider-container">
+                            <input type="range" id="hour-slider" min="1" max="12" value="1">
+                            <span id="hour-display" class="slider-value">+1h</span>
+                        </div>
                     </div>
                     <div class="stat-card prediction-card">
-                        <span class="label">Predicted</span>
+                        <span class="label">Predicted Availability</span>
                         <span id="predicted-bikes" class="value">--</span>
                         <span class="sub-label">estimated bikes</span>
                     </div>

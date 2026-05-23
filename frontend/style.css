@@ -1,11 +1,12 @@
 :root {
-    --bg-color: #0f172a;
+    --bg-color: #0b0f19;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --accent: #38bdf8;
-    --glass-bg: rgba(30, 41, 59, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --accent-purple: #a855f7;
+    --glass-bg: rgba(17, 24, 39, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -34,27 +35,32 @@ header {
     top: 20px;
     left: 20px;
     z-index: 1000;
-    padding: 1.5rem;
+    padding: 1.25rem 1.5rem;
     border-radius: 16px;
-    backdrop-filter: blur(12px);
-    width: 300px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    width: 320px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
 }
 
 h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.5px;
 }
 
 .highlight {
     color: var(--accent);
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
 }
 
 header p {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 300;
 }
 
 main {
@@ -72,21 +78,39 @@ main {
     position: absolute;
     top: 20px;
     right: 20px;
-    width: 320px;
+    width: 340px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
     z-index: 1000;
-    padding: 2rem;
+    padding: 1.75rem;
     border-radius: 16px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 .sidebar.hidden {
     transform: translateX(120%);
     opacity: 0;
     pointer-events: none;
+}
+
+/* Custom Scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .close-btn {
@@ -98,91 +122,240 @@ main {
     color: var(--text-secondary);
     font-size: 1.5rem;
     cursor: pointer;
+    transition: color 0.2s ease;
 }
 
 .close-btn:hover {
     color: var(--text-primary);
 }
 
+h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.5rem;
+}
+
+.stats-row {
+    margin-bottom: 1rem;
+}
+
 .stat-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1.25rem;
     text-align: center;
-    margin: 1.5rem 0;
     border: 1px solid var(--glass-border);
 }
 
 .stat-card.prediction-card {
-    background: rgba(56, 189, 248, 0.1);
-    border-color: rgba(56, 189, 248, 0.3);
+    background: rgba(168, 85, 247, 0.08);
+    border-color: rgba(168, 85, 247, 0.25);
+    margin-top: 0.75rem;
 }
 
 .label {
     display: block;
     color: var(--text-secondary);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .value {
     display: block;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--text-primary);
+    line-height: 1.1;
 }
 
 .sub-label {
     display: block;
     color: var(--text-secondary);
-    font-size: 0.8rem;
-    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.chart-section {
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 1.25rem;
+}
+
+.chart-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.chart-wrapper {
+    position: relative;
+    height: 170px;
+    width: 100%;
 }
 
 .prediction-section {
-    margin-top: 2rem;
+    margin-top: 1.25rem;
     border-top: 1px solid var(--glass-border);
-    padding-top: 1.5rem;
+    padding-top: 1.25rem;
 }
 
 .prediction-section h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
     color: var(--text-primary);
+    font-weight: 600;
 }
 
 .input-group {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .input-group label {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 input[type=range] {
     flex: 1;
-    accent-color: var(--accent);
+    accent-color: var(--accent-purple);
+    cursor: pointer;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .slider-value {
     font-weight: 600;
-    color: var(--accent);
+    color: var(--accent-purple);
     min-width: 40px;
     text-align: right;
+    font-size: 0.9rem;
 }
 
-/* Leaflet Customization */
+/* Custom Leaflet Map Markers */
+.custom-bike-marker {
+    background: none;
+    border: none;
+}
+
+.marker-pin {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    border: 2px solid;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.marker-pin:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px currentColor;
+    z-index: 9999 !important;
+}
+
+/* Marker color states based on bike count */
+.marker-pin.high {
+    background: rgba(16, 185, 129, 0.85); /* Emerald Green */
+    border-color: #10b981;
+}
+
+.marker-pin.medium {
+    background: rgba(56, 189, 248, 0.85); /* Sky Blue */
+    border-color: #38bdf8;
+    color: #0b0f19;
+}
+
+.marker-pin.critical {
+    background: rgba(239, 68, 68, 0.85); /* Red */
+    border-color: #ef4444;
+    animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+/* Leaflet Dark Popup Customization */
 .leaflet-popup-content-wrapper {
     background: var(--bg-color);
     color: var(--text-primary);
-    border-radius: 8px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+    padding: 4px;
 }
+
+.leaflet-popup-content {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    margin: 8px 12px;
+}
+
 .leaflet-popup-tip {
     background: var(--bg-color);
+    border-left: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+/* Animations */
+.animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+    .sidebar {
+        top: auto;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-height: 40vh;
+    }
 }

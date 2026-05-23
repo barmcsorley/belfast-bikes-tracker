@@ -1,0 +1,673 @@
+[
+  {
+    "station_id": "8270",
+    "name": "Victoria Square",
+    "lat": 54.598195,
+    "lon": -5.924032,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8270&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8270&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8271",
+    "name": "Linenhall/Donegall Square South",
+    "lat": 54.59584,
+    "lon": -5.929981,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8271&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8271&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8272",
+    "name": "Arthur Street/Chichester Street",
+    "lat": 54.598021,
+    "lon": -5.927744,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8272&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8272&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8273",
+    "name": "City Hall",
+    "lat": 54.59717,
+    "lon": -5.930825,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8273&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8273&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8274",
+    "name": "Waterworks",
+    "lat": 54.618327,
+    "lon": -5.938591,
+    "capacity": 5,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8274&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8274&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8275",
+    "name": "St Georges Market/Cromac Square",
+    "lat": 54.595252,
+    "lon": -5.923667,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8275&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8275&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8276",
+    "name": "Gasworks (Lagan Towpath)",
+    "lat": 54.591269,
+    "lon": -5.922573,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8276&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8276&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8277",
+    "name": "Grove Wellbeing Centre",
+    "lat": 54.621303,
+    "lon": -5.923767,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8277&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8277&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8278",
+    "name": "Gasworks (Cromac Street)",
+    "lat": 54.592164,
+    "lon": -5.925535,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8278&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8278&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8279",
+    "name": "Donegall Quay",
+    "lat": 54.601437,
+    "lon": -5.921989,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8279&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8279&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8280",
+    "name": "Alfred Street",
+    "lat": 54.59463,
+    "lon": -5.927461,
+    "capacity": 14,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8280&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8280&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8281",
+    "name": "Royal Victoria Hospital",
+    "lat": 54.589859,
+    "lon": -5.95846,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8281&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8281&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8282",
+    "name": "Elms Village",
+    "lat": 54.576133,
+    "lon": -5.942585,
+    "capacity": 10,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8282&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8282&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8283",
+    "name": "Lanyon Station Mays Meadow",
+    "lat": 54.595345,
+    "lon": -5.916481,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8283&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8283&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8284",
+    "name": "Queens University/Botanic Gardens",
+    "lat": 54.584105,
+    "lon": -5.932167,
+    "capacity": 14,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8284&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8284&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8285",
+    "name": "Antrim Road/Duncairn Centre",
+    "lat": 54.612413,
+    "lon": -5.936735,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8285&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8285&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8286",
+    "name": "Cotton Court",
+    "lat": 54.601423,
+    "lon": -5.925845,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8286&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8286&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8287",
+    "name": "Ormeau Park/Somerset Street",
+    "lat": 54.578143,
+    "lon": -5.91878,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8287&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8287&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8288",
+    "name": "Millfield/Divis Street",
+    "lat": 54.599687,
+    "lon": -5.936295,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8288&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8288&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8289",
+    "name": "Carrick Hill/St Patricks Church",
+    "lat": 54.604982,
+    "lon": -5.932856,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8289&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8289&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8290",
+    "name": "Glencairn",
+    "lat": 54.60961,
+    "lon": -5.972695,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8290&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8290&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8291",
+    "name": "Corporation Square",
+    "lat": 54.604795,
+    "lon": -5.921247,
+    "capacity": 14,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8291&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8291&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8292",
+    "name": "Ulster University",
+    "lat": 54.604635,
+    "lon": -5.92843,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8292&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8292&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8293",
+    "name": "Olympia",
+    "lat": 54.583386,
+    "lon": -5.956745,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8293&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8293&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8294",
+    "name": "Blackstaff Square",
+    "lat": 54.594811,
+    "lon": -5.933121,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8294&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8294&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8295",
+    "name": "Falls Road",
+    "lat": 54.599569,
+    "lon": -5.947155,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8295&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8295&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8296",
+    "name": "Titanic Belfast Met",
+    "lat": 54.605717,
+    "lon": -5.911111,
+    "capacity": 18,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8296&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8296&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8297",
+    "name": "Ormeau Park",
+    "lat": 54.580538,
+    "lon": -5.9205,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8297&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8297&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8298",
+    "name": "Bradbury Place",
+    "lat": 54.588117,
+    "lon": -5.935536,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8298&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8298&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8299",
+    "name": "Odyssey/Sydenham Road",
+    "lat": 54.603923,
+    "lon": -5.917245,
+    "capacity": 22,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8299&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8299&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8300",
+    "name": "Botanic Avenue",
+    "lat": 54.58932,
+    "lon": -5.933511,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8300&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8300&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8301",
+    "name": "Ormeau Road/Rosetta Roundabout",
+    "lat": 54.57276,
+    "lon": -5.915191,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8301&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8301&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8302",
+    "name": "Castle Place/Royal Avenue",
+    "lat": 54.599341,
+    "lon": -5.92983,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8302&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8302&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8303",
+    "name": "Drumglass",
+    "lat": 54.575354,
+    "lon": -5.955365,
+    "capacity": 7,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8303&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8303&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8304",
+    "name": "Belfast City Hospital",
+    "lat": 54.586567,
+    "lon": -5.939951,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8304&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8304&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8305",
+    "name": "Great Victoria Street/Hope Street",
+    "lat": 54.593466,
+    "lon": -5.934411,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8305&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8305&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8306",
+    "name": "Stranmillis",
+    "lat": 54.574852,
+    "lon": -5.93213,
+    "capacity": 14,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8306&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8306&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8308",
+    "name": "Titanic Walkway",
+    "lat": 54.611891,
+    "lon": -5.902805,
+    "capacity": 14,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8308&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8308&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8309",
+    "name": "Mater Hospital/Crumlin Road",
+    "lat": 54.608564,
+    "lon": -5.941041,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8309&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8309&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8310",
+    "name": "AllState",
+    "lat": 54.59445,
+    "lon": -5.915016,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8310&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8310&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8311",
+    "name": "Queens University Road",
+    "lat": 54.5844,
+    "lon": -5.936655,
+    "capacity": 4,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8311&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8311&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8312",
+    "name": "Bankmore",
+    "lat": 54.592683,
+    "lon": -5.93152,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8312&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8312&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8313",
+    "name": "Grosvenor Road/Servia Street",
+    "lat": 54.595319,
+    "lon": -5.949111,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8313&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8313&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8314",
+    "name": "Royal Avenue/Castlecourt",
+    "lat": 54.601307,
+    "lon": -5.931305,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8314&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8314&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8315",
+    "name": "Titanic Train Halt/Sydenham Road",
+    "lat": 54.60342,
+    "lon": -5.906295,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8315&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8315&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8316",
+    "name": "York Street Station",
+    "lat": 54.610553,
+    "lon": -5.92243,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8316&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8316&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8317",
+    "name": "Shankill Leisure Centre",
+    "lat": 54.60368,
+    "lon": -5.944411,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8317&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8317&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8318",
+    "name": "Carlisle Circus",
+    "lat": 54.607384,
+    "lon": -5.937075,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8318&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8318&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8319",
+    "name": "College Square East",
+    "lat": 54.597137,
+    "lon": -5.934825,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8319&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8319&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8320",
+    "name": "Fraser Pass",
+    "lat": 54.600577,
+    "lon": -5.905265,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8320&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8320&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8321",
+    "name": "Kennedy Centre",
+    "lat": 54.58196,
+    "lon": -5.977891,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8321&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8321&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8322",
+    "name": "Sandown Road",
+    "lat": 54.594163,
+    "lon": -5.868551,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8322&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8322&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8323",
+    "name": "Skainos",
+    "lat": 54.598857,
+    "lon": -5.899428,
+    "capacity": 8,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8323&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8323&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8324",
+    "name": "Lisnasharragh Leisure Centre",
+    "lat": 54.57772,
+    "lon": -5.88178,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8324&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8324&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8325",
+    "name": "CS Lewis",
+    "lat": 54.598299,
+    "lon": -5.890581,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8325&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8325&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8326",
+    "name": "Castlereagh Road",
+    "lat": 54.586099,
+    "lon": -5.892045,
+    "capacity": 12,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8326&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8326&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8327",
+    "name": "Falls Road/Colaiste Feirste",
+    "lat": 54.59089,
+    "lon": -5.96745,
+    "capacity": 10,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8327&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8327&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8328",
+    "name": "Connswater",
+    "lat": 54.59602,
+    "lon": -5.892921,
+    "capacity": 10,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8328&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8328&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8329",
+    "name": "Waterfront",
+    "lat": 54.597335,
+    "lon": -5.921105,
+    "capacity": 24,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8329&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8329&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "8376",
+    "name": "Queens Students Union",
+    "lat": 54.584405,
+    "lon": -5.936662,
+    "capacity": 16,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8376&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=8376&scheme_id=33"
+    }
+  },
+  {
+    "station_id": "9535",
+    "name": "Loftlines",
+    "lat": 54.607286,
+    "lon": -5.912147,
+    "capacity": 20,
+    "rental_uris": {
+      "android": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=9535&scheme_id=33",
+      "ios": "https://beryl.app/gbfs?$deeplink_path=gbfs_bay&bay_id=9535&scheme_id=33"
+    }
+  }
+]

@@ -11,19 +11,23 @@ class BikePredictionModel:
     def train(self):
         print("Dataset generation started...")
         df = generate_mock_training_data()
-        print("Dataset generated. Training model...")
+        print(f"Dataset generated with {len(df)} rows. Training model...")
         
-        X = df[["station_id", "hour", "day_of_week"]]
+        # Include weather features
+        X = df[["station_id", "hour", "day_of_week", "temperature", "is_raining"]]
         y = df["bikes_available"]
         
         self.model.fit(X, y)
         self.is_trained = True
         print("Model trained successfully.")
 
-    def predict(self, station_id, hour, day_of_week):
+    def predict(self, station_id, hour, day_of_week, temperature=12.0, is_raining=0):
         if not self.is_trained:
             raise Exception("Model is not trained yet")
             
-        input_data = pd.DataFrame([[station_id, hour, day_of_week]], columns=["station_id", "hour", "day_of_week"])
+        input_data = pd.DataFrame(
+            [[station_id, hour, day_of_week, temperature, is_raining]], 
+            columns=["station_id", "hour", "day_of_week", "temperature", "is_raining"]
+        )
         prediction = self.model.predict(input_data)[0]
         return max(0, int(round(prediction)))
