@@ -514,6 +514,22 @@ searchInput.addEventListener('input', (e) => {
     }
 });
 
+searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        const val = e.target.value.toLowerCase();
+        if (val.length < 2) return;
+        
+        const matches = Object.values(stationCache).filter(s => s.name.toLowerCase().includes(val));
+        if (matches.length > 0) {
+            const station = matches[0];
+            searchResults.classList.add('hidden');
+            searchInput.value = '';
+            map.setView([station.lat, station.lng], 16);
+            if (markers[station.id]) markers[station.id].fire('click');
+        }
+    }
+});
+
 // Close search results when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.nav-search-box')) {
