@@ -558,7 +558,9 @@ async function toggleWeatherLayer() {
             
             weatherLayer = L.tileLayer(tileUrl, {
                 opacity: 0.65,
-                zIndex: 10
+                zIndex: 10,
+                maxNativeZoom: 12,
+                maxZoom: 18
             });
         } catch(e) {
             console.error("Failed to load weather layer", e);
