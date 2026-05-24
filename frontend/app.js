@@ -4,9 +4,7 @@ let markers = {};
 let selectedStationId = null;
 let chartInstance = null;
 let stationCache = {}; // Cache station metadata locally
-
-const API_BASE_URL = 'http://127.0.0.1:8000';
-
+const API_BASE_URL = '';
 // Initialize Map
 function initMap() {
     map = L.map('map', { zoomControl: false }).setView([54.5973, -5.9301], 14); // Centered on Belfast

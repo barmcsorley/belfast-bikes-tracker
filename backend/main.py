@@ -4,6 +4,9 @@ from pydantic import BaseModel
 from typing import List, Optional
 from datetime import datetime, timedelta
 import math
+import os
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from model import BikePredictionModel
 from data_loader import get_stations, get_live_status, fetch_live_weather
 
@@ -27,9 +30,6 @@ def startup_event():
     # Retrain model on startup using the Beryl Belfast stations configuration & weather patterns
     model.train()
 
-@app.get("/")
-def read_root():
-    return {"message": "Belfast Bikes Prediction API is running"}
 
 @app.get("/weather")
 def get_weather_endpoint():
@@ -235,3 +235,8 @@ def get_station_history(station_id: int):
         "past_24h": past_data,
         "future_12h": future_data
     }
+
+# Mount static frontend files
+frontend_dir = os.path.join(os.path.dirname(__file__), "../frontend")
+app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+

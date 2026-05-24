@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  belfast-bikes:
+    build: .
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/London
