@@ -404,6 +404,14 @@ document.getElementById('close-weather').addEventListener('click', () => {
     document.getElementById('weather-overlay').classList.add('hidden');
 });
 
+document.getElementById('sidebar-toggle').addEventListener('click', () => {
+    const sideNav = document.querySelector('.side-nav');
+    if (sideNav) {
+        sideNav.classList.toggle('collapsed');
+        setTimeout(() => map.invalidateSize(), 300); // Trigger map resize after animation
+    }
+});
+
 // --- Search and Favourites Logic ---
 
 // Default favourites by name (will be converted to IDs once data loads)

@@ -35,6 +35,15 @@ body {
     flex-direction: column;
     padding: 1.5rem;
     z-index: 100;
+    transition: width 0.3s, padding 0.3s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.side-nav.collapsed {
+    width: 0;
+    padding: 0;
+    border-right: none;
 }
 
 .nav-brand {
@@ -374,4 +383,20 @@ input[type=range] { width: 100%; accent-color: var(--accent-cyan); height: 4px; 
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px);
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+.icon-btn:hover {
+    color: var(--primary);
 }
