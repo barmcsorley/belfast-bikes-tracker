@@ -237,6 +237,6 @@ def get_station_history(station_id: int):
     }
 
 # Mount static frontend files
-frontend_dir = os.path.join(os.path.dirname(__file__), "../frontend")
+frontend_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "../frontend"))
 app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
