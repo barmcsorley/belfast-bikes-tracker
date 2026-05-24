@@ -152,7 +152,7 @@ async function selectStation(station) {
     const favStarBtn = document.getElementById('fav-star-btn');
     if (favStarBtn) {
         let favs = JSON.parse(localStorage.getItem('belfastBikesFavourites')) || [];
-        if (favs.includes(station.id)) {
+        if (favs.map(String).includes(String(station.id))) {
             favStarBtn.classList.add('active');
             favStarBtn.textContent = '★';
         } else {
@@ -461,9 +461,10 @@ if (favStarBtn) {
         if (!selectedStationId) return;
         
         let favs = JSON.parse(localStorage.getItem('belfastBikesFavourites')) || [];
+        const strSelectedId = String(selectedStationId);
         
-        if (favs.includes(selectedStationId)) {
-            favs = favs.filter(id => id !== selectedStationId);
+        if (favs.map(String).includes(strSelectedId)) {
+            favs = favs.filter(id => String(id) !== strSelectedId);
             favStarBtn.classList.remove('active');
             favStarBtn.textContent = '☆';
         } else {
