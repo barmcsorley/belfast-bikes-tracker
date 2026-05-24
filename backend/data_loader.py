@@ -92,8 +92,18 @@ def get_live_status():
         for s in data["data"]["stations"]:
             try:
                 sid = int(s["station_id"])
+                pedal_count = 0
+                electric_count = 0
+                for v in s.get("vehicle_types_available", []):
+                    if v.get("vehicle_type_id") == "beryl_bike":
+                        pedal_count = int(v.get("count", 0))
+                    elif v.get("vehicle_type_id") == "bbe":
+                        electric_count = int(v.get("count", 0))
+                        
                 status_dict[sid] = {
                     "bikes_available": int(s.get("num_bikes_available", 0)),
+                    "pedal_bikes_available": pedal_count,
+                    "electric_bikes_available": electric_count,
                     "docks_available": int(s.get("num_docks_available", 0)),
                     "is_renting": bool(s.get("is_renting", True))
                 }
@@ -181,6 +191,13 @@ def generate_mock_training_data(days=30):
             final_ratio = max(0.05, min(0.95, base_ratio + noise))
             bikes_available = int(round(capacity * final_ratio))
             
+            # Split into electric and pedal (approx 20% electric)
+            electric_bikes = 0
+            if bikes_available > 0:
+                electric_ratio = random.uniform(0.1, 0.3)
+                electric_bikes = int(round(bikes_available * electric_ratio))
+            pedal_bikes = bikes_available - electric_bikes
+            
             data.append({
                 "station_id": station_id,
                 "hour": hour,
@@ -188,6 +205,8 @@ def generate_mock_training_data(days=30):
                 "temperature": temp,
                 "is_raining": is_raining,
                 "bikes_available": bikes_available,
+                "pedal_bikes_available": pedal_bikes,
+                "electric_bikes_available": electric_bikes,
                 "capacity": capacity
             })
             

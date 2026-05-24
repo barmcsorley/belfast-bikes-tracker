@@ -23,6 +23,26 @@ function initMap() {
     };
     locateControl.addTo(map);
 
+    let locationMarker = null;
+    map.on('locationfound', function(e) {
+        if (!locationMarker) {
+            locationMarker = L.circleMarker(e.latlng, {
+                radius: 8,
+                fillColor: "#3b82f6",
+                color: "#ffffff",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 1,
+                className: 'pulse-dot'
+            }).addTo(map);
+        } else {
+            locationMarker.setLatLng(e.latlng);
+        }
+    });
+
+    // Auto locate
+    map.locate({setView: false});
+
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
@@ -73,10 +93,12 @@ async function fetchStations() {
             }
 
             // Create custom HTML marker
+            let lightning = station.current_electric_bikes > 0 ? '<div style="position: absolute; top: -8px; right: -8px; font-size: 14px; text-shadow: 0 0 5px black;">⚡</div>' : '';
             const customIcon = L.divIcon({
                 className: 'custom-bike-marker',
-                html: `<div class="marker-pin ${availabilityClass}">
+                html: `<div class="marker-pin ${availabilityClass}" style="position: relative;">
                          <span>${station.current_bikes_available}</span>
+                         ${lightning}
                        </div>`,
                 iconSize: [36, 36],
                 iconAnchor: [18, 18]
@@ -106,15 +128,21 @@ async function selectStation(station) {
     const nameEl = document.getElementById('station-name');
     const currentEl = document.getElementById('current-bikes');
     const capacityEl = document.getElementById('capacity-display');
+    const currentPedal = document.getElementById('current-pedal');
+    const currentElectric = document.getElementById('current-electric');
 
     nameEl.textContent = station.name;
     currentEl.textContent = station.current_bikes_available;
     capacityEl.textContent = `/ ${station.capacity} capacity`;
+    currentPedal.textContent = station.current_pedal_bikes;
+    currentElectric.textContent = station.current_electric_bikes;
 
     // Reset slider
     document.getElementById('hour-slider').value = 1;
     document.getElementById('hour-display').textContent = '+1h';
     document.getElementById('predicted-bikes').textContent = '--';
+    document.getElementById('predicted-pedal').textContent = '--';
+    document.getElementById('predicted-electric').textContent = '--';
 
     sidebar.classList.remove('hidden');
 
@@ -134,25 +162,33 @@ async function fetchAndRenderChart(stationId) {
         const ctx = document.getElementById('availability-chart').getContext('2d');
         
         const labels = [];
-        const pastValues = [];
-        const futureValues = [];
+        const pedalPast = [];
+        const pedalFuture = [];
+        const electricPast = [];
+        const electricFuture = [];
         
         // Extract past 24 hours
         historyData.past_24h.forEach(item => {
             labels.push(item.time);
-            pastValues.push(item.bikes);
-            futureValues.push(null);
+            pedalPast.push(item.pedal_bikes);
+            electricPast.push(item.electric_bikes);
+            pedalFuture.push(null);
+            electricFuture.push(null);
         });
         
         // Connect the two datasets at the current point
-        const currentBikes = historyData.past_24h[historyData.past_24h.length - 1].bikes;
-        futureValues[historyData.past_24h.length - 1] = currentBikes;
+        const currPedal = historyData.past_24h[historyData.past_24h.length - 1].pedal_bikes;
+        const currElectric = historyData.past_24h[historyData.past_24h.length - 1].electric_bikes;
+        pedalFuture[historyData.past_24h.length - 1] = currPedal;
+        electricFuture[historyData.past_24h.length - 1] = currElectric;
         
         // Extract future 12 hours
         historyData.future_12h.forEach(item => {
             labels.push(item.time);
-            pastValues.push(null);
-            futureValues.push(item.bikes);
+            pedalPast.push(null);
+            electricPast.push(null);
+            pedalFuture.push(item.pedal_bikes);
+            electricFuture.push(item.electric_bikes);
         });
         
         if (chartInstance) {
@@ -165,26 +201,49 @@ async function fetchAndRenderChart(stationId) {
                 labels: labels,
                 datasets: [
                     {
-                        label: 'History (Past 24h)',
-                        data: pastValues,
+                        label: 'Pedal (History)',
+                        data: pedalPast,
                         borderColor: '#38bdf8', // Sky blue
                         backgroundColor: 'rgba(56, 189, 248, 0.08)',
-                        borderWidth: 2.5,
+                        borderWidth: 2,
                         tension: 0.4,
-                        fill: true,
+                        fill: false,
                         spanGaps: true,
                         pointRadius: 0,
                         pointHoverRadius: 4
                     },
                     {
-                        label: 'Forecast (Next 12h)',
-                        data: futureValues,
-                        borderColor: '#a855f7', // Purple
-                        backgroundColor: 'rgba(168, 85, 247, 0.04)',
-                        borderWidth: 2.5,
+                        label: 'Electric (History)',
+                        data: electricPast,
+                        borderColor: '#f59e0b', // Amber
+                        backgroundColor: 'rgba(245, 158, 11, 0.08)',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        fill: false,
+                        spanGaps: true,
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    },
+                    {
+                        label: 'Pedal (Forecast)',
+                        data: pedalFuture,
+                        borderColor: '#38bdf8',
+                        borderWidth: 2,
                         borderDash: [5, 5],
                         tension: 0.4,
-                        fill: true,
+                        fill: false,
+                        spanGaps: true,
+                        pointRadius: 0,
+                        pointHoverRadius: 4
+                    },
+                    {
+                        label: 'Electric (Forecast)',
+                        data: electricFuture,
+                        borderColor: '#f59e0b',
+                        borderWidth: 2,
+                        borderDash: [5, 5],
+                        tension: 0.4,
+                        fill: false,
                         spanGaps: true,
                         pointRadius: 0,
                         pointHoverRadius: 4
@@ -259,7 +318,11 @@ async function updatePrediction(hoursAhead) {
         const data = await response.json();
 
         const predEl = document.getElementById('predicted-bikes');
+        const predPedalEl = document.getElementById('predicted-pedal');
+        const predElecEl = document.getElementById('predicted-electric');
         predEl.textContent = data.predicted_bikes;
+        predPedalEl.textContent = data.predicted_pedal_bikes;
+        predElecEl.textContent = data.predicted_electric_bikes;
     } catch (error) {
         console.error('Error getting prediction:', error);
     }

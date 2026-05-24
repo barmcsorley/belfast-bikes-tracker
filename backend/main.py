@@ -61,20 +61,29 @@ def get_stations_endpoint():
         # Use live availability if present, otherwise fall back to model prediction
         if station_id in live_status:
             current_bikes = live_status[station_id]["bikes_available"]
+            current_pedal_bikes = live_status[station_id]["pedal_bikes_available"]
+            current_electric_bikes = live_status[station_id]["electric_bikes_available"]
             is_active = live_status[station_id]["is_renting"]
         else:
             try:
-                current_bikes = model.predict(
+                preds = model.predict(
                     station_id, hour, day_of_week, 
                     temperature=current_temp, is_raining=is_raining
                 )
+                current_bikes = preds["bikes_available"]
+                current_pedal_bikes = preds["pedal_bikes_available"]
+                current_electric_bikes = preds["electric_bikes_available"]
             except Exception:
                 current_bikes = int(station["capacity"] * 0.5)
+                current_pedal_bikes = int(current_bikes * 0.8)
+                current_electric_bikes = current_bikes - current_pedal_bikes
             is_active = True
             
         response.append({
             **station,
             "current_bikes_available": current_bikes,
+            "current_pedal_bikes": current_pedal_bikes,
+            "current_electric_bikes": current_electric_bikes,
             "is_active": is_active
         })
     return response
@@ -108,7 +117,9 @@ def predict_availability(
         "day_of_week": day_of_week,
         "temperature": temperature,
         "is_raining": is_raining,
-        "predicted_bikes": prediction,
+        "predicted_bikes": prediction["bikes_available"],
+        "predicted_pedal_bikes": prediction["pedal_bikes_available"],
+        "predicted_electric_bikes": prediction["electric_bikes_available"],
         "capacity": station["capacity"]
     }
 
@@ -127,10 +138,14 @@ def get_station_history(station_id: int):
     
     # Fetch live status to anchor the current hour
     live_bikes = None
+    live_pedal = None
+    live_electric = None
     try:
         live_status = get_live_status()
         if station_id in live_status:
             live_bikes = live_status[station_id]["bikes_available"]
+            live_pedal = live_status[station_id]["pedal_bikes_available"]
+            live_electric = live_status[station_id]["electric_bikes_available"]
     except Exception:
         pass
         
@@ -179,25 +194,37 @@ def get_station_history(station_id: int):
         temp, rain = estimate_weather(h_offset)
         
         try:
-            bikes = model.predict(station_id, hour, day_of_week, temp, rain)
+            preds = model.predict(station_id, hour, day_of_week, temp, rain)
+            bikes = preds["bikes_available"]
+            pedal = preds["pedal_bikes_available"]
+            electric = preds["electric_bikes_available"]
         except Exception:
             bikes = int(capacity * 0.5)
+            pedal = int(bikes * 0.8)
+            electric = bikes - pedal
             
         time_str = target_time.strftime("%I %p")
         past_data.append({
             "time": time_str,
             "timestamp": target_time.isoformat(),
             "bikes": bikes,
+            "pedal_bikes": pedal,
+            "electric_bikes": electric,
             "temperature": temp,
             "is_raining": rain
         })
         
     # Add current status
     current_bikes = live_bikes if live_bikes is not None else int(capacity * 0.5)
+    current_pedal = live_pedal if live_pedal is not None else int(current_bikes * 0.8)
+    current_electric = live_electric if live_electric is not None else (current_bikes - current_pedal)
+    
     past_data.append({
         "time": "Now",
         "timestamp": current_time.isoformat(),
         "bikes": current_bikes,
+        "pedal_bikes": current_pedal,
+        "electric_bikes": current_electric,
         "temperature": current_temp,
         "is_raining": current_rain
     })
@@ -211,15 +238,22 @@ def get_station_history(station_id: int):
         temp, rain = estimate_weather(h_offset)
         
         try:
-            bikes = model.predict(station_id, hour, day_of_week, temp, rain)
+            preds = model.predict(station_id, hour, day_of_week, temp, rain)
+            bikes = preds["bikes_available"]
+            pedal = preds["pedal_bikes_available"]
+            electric = preds["electric_bikes_available"]
         except Exception:
             bikes = int(capacity * 0.5)
+            pedal = int(bikes * 0.8)
+            electric = bikes - pedal
             
         time_str = target_time.strftime("%I %p")
         future_data.append({
             "time": time_str,
             "timestamp": target_time.isoformat(),
             "bikes": bikes,
+            "pedal_bikes": pedal,
+            "electric_bikes": electric,
             "temperature": temp,
             "is_raining": rain
         })

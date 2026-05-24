@@ -15,7 +15,7 @@ class BikePredictionModel:
         
         # Include weather features
         X = df[["station_id", "hour", "day_of_week", "temperature", "is_raining"]]
-        y = df["bikes_available"]
+        y = df[["pedal_bikes_available", "electric_bikes_available"]]
         
         self.model.fit(X, y)
         self.is_trained = True
@@ -30,4 +30,11 @@ class BikePredictionModel:
             columns=["station_id", "hour", "day_of_week", "temperature", "is_raining"]
         )
         prediction = self.model.predict(input_data)[0]
-        return max(0, int(round(prediction)))
+        pedal_pred = max(0, int(round(prediction[0])))
+        electric_pred = max(0, int(round(prediction[1])))
+        
+        return {
+            "bikes_available": pedal_pred + electric_pred,
+            "pedal_bikes_available": pedal_pred,
+            "electric_bikes_available": electric_pred
+        }
