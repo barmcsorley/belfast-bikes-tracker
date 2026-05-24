@@ -40,6 +40,13 @@ function initMap() {
         }
     });
 
+    map.on('locationerror', function(e) {
+        console.warn("Location error:", e.message);
+        if (e.message.includes("secure") || e.message.includes("https") || e.code === 1) {
+            console.warn("Geolocation requires HTTPS on non-localhost domains.");
+        }
+    });
+
     // Auto locate
     map.locate({setView: true, maxZoom: 14});
 
