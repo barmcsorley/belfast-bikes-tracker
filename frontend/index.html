@@ -3,79 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belfast Bikes Predictor</title>
+    <title>Belfast Bikes AI Dashboard</title>
     <!-- Leaftlet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
-    <div class="app-container">
-        <header class="glass-panel animate-fade-in" style="display: flex; justify-content: space-between; align-items: center; min-width: 340px;">
-            <div>
-                <h1>Belfast Bikes <span class="highlight">AI</span></h1>
-                <p>Real-time Availability & Future Predictions</p>
+    <div class="dashboard-container">
+        <!-- Left Sidebar Navigation -->
+        <nav class="side-nav">
+            <div class="nav-brand">
+                <span class="logo-icon">🚲</span>
+                <h2>Belfast Bikes AI</h2>
             </div>
-            <div id="weather-widget" style="text-align: center; margin-left: 1rem;">
-                <div style="font-size: 1.5rem; line-height: 1;">--</div>
-                <div style="font-size: 0.85rem; color: var(--text-secondary);">--°C</div>
-            </div>
-        </header>
-        
-        <main>
-            <div id="map" class="map-container"></div>
             
-            <div id="sidebar" class="sidebar glass-panel hidden">
-                <button id="close-sidebar" class="close-btn" aria-label="Close sidebar">&times;</button>
-                <h2 id="station-name">Station Name</h2>
-                
-                <div class="stats-row">
-                    <div class="stat-card">
-                        <span class="label">Currently Available</span>
-                        <div style="display: flex; align-items: baseline; justify-content: center; gap: 8px;">
-                            <span id="current-bikes" class="value">--</span>
-                            <span id="capacity-display" class="sub-label">/ -- capacity</span>
-                        </div>
-                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary);">
-                            <span>🚲 <span id="current-pedal">--</span></span>
-                            <span>⚡ <span id="current-electric">--</span></span>
-                        </div>
-                    </div>
-                </div>
+            <div class="nav-search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search">
+            </div>
 
-                <!-- Chart container for past 24h & future 12h -->
-                <div class="chart-section">
-                    <h3>Availability & Forecast</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="availability-chart"></canvas>
-                    </div>
+            <ul class="nav-links">
+                <li><a href="#"><span class="icon">📊</span> Dashboard</a></li>
+                <li><a href="#"><span class="icon">🌐</span> Network</a></li>
+                <li class="active"><a href="#"><span class="icon">🗺️</span> Map</a></li>
+                <li><a href="#"><span class="icon">📈</span> Analytics</a></li>
+                <li><a href="#"><span class="icon">⚙️</span> Settings</a></li>
+            </ul>
+
+            <div class="nav-profile">
+                <div class="avatar">👨‍💻</div>
+                <div class="profile-info">
+                    <span class="name">Aidan M.</span>
+                    <span class="role">Belfast Bikes AI</span>
                 </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header Bar -->
+            <header class="top-bar">
+                <div class="location-breadcrumbs">
+                    Streets: <span>Victoria St</span> <span>Donegall Pl</span> &nbsp; Landmarks: <span>Royal Ave</span>
+                </div>
+                <div class="top-right">
+                    <span class="action-icon">🔍</span>
+                    <span class="action-icon">🔔</span>
+                    <span class="datetime" id="top-datetime">Belfast, UK | Oct 26, 2023 | 22:32</span>
+                    <div id="weather-widget" class="weather-widget">--°C</div>
+                </div>
+            </header>
+
+            <!-- Map Container -->
+            <div class="map-wrapper">
+                <div id="map" class="map-container"></div>
                 
-                <div class="prediction-section">
-                    <h3>Forecast Simulation</h3>
-                    <div class="input-group">
-                        <label for="hour-slider">Predict for (Hours from now):</label>
-                        <div class="slider-container">
-                            <input type="range" id="hour-slider" min="1" max="12" value="1">
-                            <span id="hour-display" class="slider-value">+1h</span>
+                <!-- Station Details Card (Floating over map) -->
+                <div id="sidebar" class="station-card glass-panel hidden">
+                    <div class="card-header">
+                        <p class="subtitle">Belfast Bikes AI</p>
+                        <button id="close-sidebar" class="close-btn" aria-label="Close">...</button>
+                    </div>
+                    
+                    <h2 id="station-name">VICTORIA SQUARE STATION</h2>
+                    <p class="station-subtitle">Belfast Bikes AI / <span id="station-subname">Victoria Square</span></p>
+
+                    <div class="current-status-box">
+                        <div class="status-header">
+                            <div class="bike-pill"><span class="bike-icon">🚲</span></div>
+                            <span>Current Status</span>
+                            <span class="arrow-icon">›</span>
+                        </div>
+                        <div class="status-numbers">
+                            <span id="current-bikes" class="value">6</span>
+                            <span class="slash">/</span>
+                            <span id="capacity-display" class="capacity">8 bikes available</span>
+                        </div>
+                        <div class="status-footer">
+                            <span class="next-bike">Next Bike Due: <strong>10 mins</strong></span>
+                            <span class="charge-status">40% charged</span>
                         </div>
                     </div>
-                    <div class="stat-card prediction-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                            <span class="label">Predicted Availability</span>
-                            <span id="hour-display" style="font-size: 0.9rem; font-weight: 600; color: var(--text-primary); background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 12px;">+1h</span>
+
+                    <div class="chart-section">
+                        <h3>Bike Availability (Past 24h & Forecast)</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="availability-chart"></canvas>
                         </div>
-                        <div style="display: flex; align-items: baseline; justify-content: center; gap: 8px;">
-                            <span id="predicted-bikes" class="value">--</span>
-                            <span class="sub-label">estimated bikes</span>
+                    </div>
+
+                    <div class="prediction-section">
+                        <h3>Activity Slider</h3>
+                        <div class="slider-container">
+                            <div class="slider-labels">
+                                <span id="hour-display" class="current-time-label">10:32 PM (Now)</span>
+                                <span id="predicted-display-val" class="predicted-val-label">8</span>
+                            </div>
+                            <input type="range" id="hour-slider" min="1" max="12" value="1">
+                            <div class="time-ticks">
+                                <span>8:00 PM</span>
+                                <span>10:00 PM</span>
+                                <span>12:00 AM</span>
+                                <span>2:00 AM</span>
+                            </div>
                         </div>
-                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary);">
-                            <span>🚲 <span id="predicted-pedal">--</span></span>
-                            <span>⚡ <span id="predicted-electric">--</span></span>
-                        </div>
+                    </div>
+                    
+                    <!-- Hidden elements required by JS but not shown in this mock design -->
+                    <div style="display: none;">
+                        <span id="current-pedal"></span>
+                        <span id="current-electric"></span>
+                        <span id="predicted-bikes"></span>
+                        <span id="predicted-pedal"></span>
+                        <span id="predicted-electric"></span>
                     </div>
                 </div>
             </div>
@@ -84,6 +128,6 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="app.js?v=2"></script>
+    <script src="app.js?v=3"></script>
 </body>
 </html>

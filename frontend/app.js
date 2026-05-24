@@ -99,16 +99,18 @@ async function fetchStations() {
                 availabilityClass = 'high';
             }
 
-            // Create custom HTML marker
-            let lightning = station.current_electric_bikes > 0 ? '<div style="position: absolute; top: -8px; right: -8px; font-size: 14px; text-shadow: 0 0 5px black;">⚡</div>' : '';
+            // Create custom HTML teardrop marker
+            let lightning = station.current_electric_bikes > 0 ? '<div style="position: absolute; top: -10px; right: -10px; font-size: 14px; transform: rotate(45deg); text-shadow: 0 0 5px black;">⚡</div>' : '';
             const customIcon = L.divIcon({
                 className: 'custom-bike-marker',
-                html: `<div class="marker-pin ${availabilityClass}" style="position: relative;">
-                         <span>${station.current_bikes_available}</span>
-                         ${lightning}
+                html: `<div class="marker-pin ${availabilityClass}">
+                         <div class="marker-content">
+                            <span>${station.current_bikes_available}</span>
+                            ${lightning}
+                         </div>
                        </div>`,
-                iconSize: [36, 36],
-                iconAnchor: [18, 18]
+                iconSize: [32, 32],
+                iconAnchor: [16, 32]
             });
 
             const marker = L.marker([station.lat, station.lng], { icon: customIcon })
@@ -133,14 +135,16 @@ async function selectStation(station) {
 
     const sidebar = document.getElementById('sidebar');
     const nameEl = document.getElementById('station-name');
+    const subnameEl = document.getElementById('station-subname');
     const currentEl = document.getElementById('current-bikes');
     const capacityEl = document.getElementById('capacity-display');
     const currentPedal = document.getElementById('current-pedal');
     const currentElectric = document.getElementById('current-electric');
 
-    nameEl.textContent = station.name;
+    nameEl.textContent = station.name.toUpperCase() + " STATION";
+    if (subnameEl) subnameEl.textContent = station.name;
     currentEl.textContent = station.current_bikes_available;
-    capacityEl.textContent = `/ ${station.capacity} capacity`;
+    capacityEl.textContent = `${station.capacity} bikes available`;
     currentPedal.textContent = station.current_pedal_bikes;
     currentElectric.textContent = station.current_electric_bikes;
 
@@ -210,11 +214,11 @@ async function fetchAndRenderChart(stationId) {
                     {
                         label: 'Pedal (History)',
                         data: pedalPast,
-                        borderColor: '#38bdf8', // Sky blue
-                        backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                        borderColor: '#06b6d4', // Cyan
+                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
                         borderWidth: 2,
                         tension: 0.4,
-                        fill: false,
+                        fill: true,
                         spanGaps: true,
                         pointRadius: 0,
                         pointHoverRadius: 4
@@ -222,11 +226,11 @@ async function fetchAndRenderChart(stationId) {
                     {
                         label: 'Electric (History)',
                         data: electricPast,
-                        borderColor: '#f59e0b', // Amber
-                        backgroundColor: 'rgba(245, 158, 11, 0.08)',
+                        borderColor: '#a855f7', // Purple
+                        backgroundColor: 'rgba(168, 85, 247, 0.1)',
                         borderWidth: 2,
                         tension: 0.4,
-                        fill: false,
+                        fill: true,
                         spanGaps: true,
                         pointRadius: 0,
                         pointHoverRadius: 4
@@ -234,7 +238,7 @@ async function fetchAndRenderChart(stationId) {
                     {
                         label: 'Pedal (Forecast)',
                         data: pedalFuture,
-                        borderColor: '#38bdf8',
+                        borderColor: '#06b6d4',
                         borderWidth: 2,
                         borderDash: [5, 5],
                         tension: 0.4,
@@ -246,7 +250,7 @@ async function fetchAndRenderChart(stationId) {
                     {
                         label: 'Electric (Forecast)',
                         data: electricFuture,
-                        borderColor: '#f59e0b',
+                        borderColor: '#a855f7',
                         borderWidth: 2,
                         borderDash: [5, 5],
                         tension: 0.4,
@@ -327,9 +331,12 @@ async function updatePrediction(hoursAhead) {
         const predEl = document.getElementById('predicted-bikes');
         const predPedalEl = document.getElementById('predicted-pedal');
         const predElecEl = document.getElementById('predicted-electric');
-        predEl.textContent = data.predicted_bikes;
-        predPedalEl.textContent = data.predicted_pedal_bikes;
-        predElecEl.textContent = data.predicted_electric_bikes;
+        const displayValEl = document.getElementById('predicted-display-val');
+
+        if (predEl) predEl.textContent = data.predicted_bikes;
+        if (predPedalEl) predPedalEl.textContent = data.predicted_pedal_bikes;
+        if (predElecEl) predElecEl.textContent = data.predicted_electric_bikes;
+        if (displayValEl) displayValEl.textContent = data.predicted_bikes;
     } catch (error) {
         console.error('Error getting prediction:', error);
     }
