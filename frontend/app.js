@@ -381,18 +381,17 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         });
         
         // Add active class to the clicked tab
-        li.classList.add('active');
-
         const text = link.textContent.trim();
         document.getElementById('favourites-panel').classList.add('hidden');
-        document.getElementById('weather-overlay').classList.add('hidden');
 
         if (text.includes('Favourites')) {
             renderFavourites();
             document.getElementById('favourites-panel').classList.remove('hidden');
         } else if (text.includes('Weather')) {
-            document.getElementById('weather-overlay').classList.remove('hidden');
-        } else if (!text.includes('Map')) {
+            toggleWeatherLayer();
+        } else if (text.includes('Map')) {
+            // Just close panels
+        } else {
             alert(text + " module is currently under active development and will be available soon!");
         }
     });
@@ -400,10 +399,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 document.getElementById('close-favourites').addEventListener('click', () => {
     document.getElementById('favourites-panel').classList.add('hidden');
-});
-
-document.getElementById('close-weather').addEventListener('click', () => {
-    document.getElementById('weather-overlay').classList.add('hidden');
 });
 
 // --- Search and Favourites Logic ---
@@ -542,3 +537,36 @@ document.addEventListener('click', (e) => {
         searchResults.classList.add('hidden');
     }
 });
+
+// Weather Radar Layer
+let weatherLayer = null;
+let isWeatherVisible = false;
+
+async function toggleWeatherLayer() {
+    if (isWeatherVisible && weatherLayer) {
+        map.removeLayer(weatherLayer);
+        isWeatherVisible = false;
+        return;
+    }
+
+    if (!weatherLayer) {
+        try {
+            const res = await fetch('https://api.rainviewer.com/public/weather-maps.json');
+            const data = await res.json();
+            const latest = data.radar.past[data.radar.past.length - 1].path;
+            const tileUrl = `https://tilecache.rainviewer.com${latest}/256/{z}/{x}/{y}/2/1_1.png`;
+            
+            weatherLayer = L.tileLayer(tileUrl, {
+                opacity: 0.65,
+                zIndex: 10
+            });
+        } catch(e) {
+            console.error("Failed to load weather layer", e);
+            alert("Weather radar is currently unavailable.");
+            return;
+        }
+    }
+    
+    map.addLayer(weatherLayer);
+    isWeatherVisible = true;
+}
