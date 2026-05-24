@@ -4,7 +4,7 @@ services:
   belfast-bikes:
     build: .
     ports:
-      - "8000:8000"
+      - "8008:8000"
     restart: unless-stopped
     environment:
       - TZ=Europe/London
