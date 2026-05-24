@@ -148,6 +148,19 @@ async function selectStation(station) {
     currentPedal.textContent = station.current_pedal_bikes;
     currentElectric.textContent = station.current_electric_bikes;
 
+    // Update star button
+    const favStarBtn = document.getElementById('fav-star-btn');
+    if (favStarBtn) {
+        let favs = JSON.parse(localStorage.getItem('belfastBikesFavourites')) || [];
+        if (favs.includes(station.id)) {
+            favStarBtn.classList.add('active');
+            favStarBtn.textContent = '★';
+        } else {
+            favStarBtn.classList.remove('active');
+            favStarBtn.textContent = '☆';
+        }
+    }
+
     // Reset slider
     document.getElementById('hour-slider').value = 1;
     document.getElementById('hour-display').textContent = '+1h';
@@ -370,10 +383,139 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         // Add active class to the clicked tab
         li.classList.add('active');
 
-        // Show mock alert if clicking something other than the Map
         const text = link.textContent.trim();
-        if (!text.includes('Map')) {
+        if (text.includes('Map')) {
+            document.getElementById('favourites-panel').classList.add('hidden');
+        } else if (text.includes('Favourites')) {
+            renderFavourites();
+            document.getElementById('favourites-panel').classList.remove('hidden');
+        } else {
+            document.getElementById('favourites-panel').classList.add('hidden');
             alert(text + " module is currently under active development and will be available soon!");
         }
     });
+});
+
+document.getElementById('close-favourites').addEventListener('click', () => {
+    document.getElementById('favourites-panel').classList.add('hidden');
+});
+
+// --- Search and Favourites Logic ---
+
+// Default favourites by name (will be converted to IDs once data loads)
+const DEFAULT_FAV_NAMES = ['Sandown Road', 'CS Lewis Square'];
+
+function initFavourites() {
+    let favs = localStorage.getItem('belfastBikesFavourites');
+    if (!favs && Object.keys(stationCache).length > 0) {
+        // First load: find IDs for default names
+        const defaultIds = Object.values(stationCache)
+            .filter(s => DEFAULT_FAV_NAMES.some(name => s.name.includes(name)))
+            .map(s => s.id);
+        localStorage.setItem('belfastBikesFavourites', JSON.stringify(defaultIds));
+    }
+}
+
+// Ensure initFavourites runs after fetchStations
+const originalFetch = window.fetchStations || fetchStations;
+window.fetchStations = async function() {
+    await originalFetch();
+    initFavourites();
+};
+
+function renderFavourites() {
+    const list = document.getElementById('favourites-list');
+    list.innerHTML = '';
+    const favs = JSON.parse(localStorage.getItem('belfastBikesFavourites')) || [];
+    
+    if (favs.length === 0) {
+        list.innerHTML = '<p style="color:var(--text-secondary);font-size:0.85rem;text-align:center;margin-top:20px;">No favourites yet. Click the star on any station to add it!</p>';
+        return;
+    }
+
+    favs.forEach(id => {
+        const station = stationCache[id];
+        if (!station) return;
+        
+        const div = document.createElement('div');
+        div.className = 'fav-item';
+        div.innerHTML = `
+            <h4>${station.name}</h4>
+            <div class="fav-stats">
+                <span>🚲 ${station.current_pedal_bikes}</span>
+                <span>⚡ ${station.current_electric_bikes}</span>
+                <span style="margin-left:auto;">${station.current_bikes_available}/${station.capacity} Total</span>
+            </div>
+        `;
+        div.onclick = () => {
+            map.setView([station.lat, station.lng], 16);
+            if (markers[id]) markers[id].fire('click');
+        };
+        list.appendChild(div);
+    });
+}
+
+const favStarBtn = document.getElementById('fav-star-btn');
+if (favStarBtn) {
+    favStarBtn.addEventListener('click', () => {
+        if (!selectedStationId) return;
+        
+        let favs = JSON.parse(localStorage.getItem('belfastBikesFavourites')) || [];
+        
+        if (favs.includes(selectedStationId)) {
+            favs = favs.filter(id => id !== selectedStationId);
+            favStarBtn.classList.remove('active');
+            favStarBtn.textContent = '☆';
+        } else {
+            favs.push(selectedStationId);
+            favStarBtn.classList.add('active');
+            favStarBtn.textContent = '★';
+        }
+        
+        localStorage.setItem('belfastBikesFavourites', JSON.stringify(favs));
+        
+        // Refresh list if panel is open
+        if (!document.getElementById('favourites-panel').classList.contains('hidden')) {
+            renderFavourites();
+        }
+    });
+}
+
+// Search Logic
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+
+searchInput.addEventListener('input', (e) => {
+    const val = e.target.value.toLowerCase();
+    searchResults.innerHTML = '';
+    
+    if (val.length < 2) {
+        searchResults.classList.add('hidden');
+        return;
+    }
+    
+    const matches = Object.values(stationCache).filter(s => s.name.toLowerCase().includes(val));
+    if (matches.length > 0) {
+        searchResults.classList.remove('hidden');
+        matches.slice(0, 6).forEach(station => {
+            const li = document.createElement('li');
+            li.textContent = station.name;
+            li.onclick = () => {
+                searchResults.classList.add('hidden');
+                searchInput.value = '';
+                map.setView([station.lat, station.lng], 16);
+                if (markers[station.id]) markers[station.id].fire('click');
+            };
+            searchResults.appendChild(li);
+        });
+    } else {
+        searchResults.classList.add('hidden');
+    }
+});
+
+// Close search results when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-search-box')) {
+        searchResults.classList.add('hidden');
+    }
 });

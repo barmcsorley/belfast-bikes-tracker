@@ -21,15 +21,16 @@
                 <h2>Belfast Bikes AI</h2>
             </div>
             
-            <div class="nav-search-box">
+            <div class="nav-search-box" style="position: relative;">
                 <span class="search-icon">🔍</span>
-                <input type="text" placeholder="Search">
+                <input type="text" id="search-input" placeholder="Search station...">
+                <ul id="search-results" class="search-results hidden"></ul>
             </div>
 
             <ul class="nav-links">
-                <li><a href="#"><span class="icon">📊</span> Dashboard</a></li>
+                <li><a href="#" id="nav-favourites"><span class="icon">⭐</span> Favourites</a></li>
                 <li><a href="#"><span class="icon">🌐</span> Network</a></li>
-                <li class="active"><a href="#"><span class="icon">🗺️</span> Map</a></li>
+                <li class="active"><a href="#" id="nav-map"><span class="icon">🗺️</span> Map</a></li>
                 <li><a href="#"><span class="icon">📈</span> Analytics</a></li>
                 <li><a href="#"><span class="icon">⚙️</span> Settings</a></li>
             </ul>
@@ -62,11 +63,25 @@
             <div class="map-wrapper">
                 <div id="map" class="map-container"></div>
                 
+                <!-- Favourites Panel (Left) -->
+                <div id="favourites-panel" class="favourites-panel hidden">
+                    <div class="card-header">
+                        <h2>⭐ My Favourites</h2>
+                        <button id="close-favourites" class="close-btn" aria-label="Close">✕</button>
+                    </div>
+                    <div id="favourites-list" class="favourites-list">
+                        <!-- Favourites cards will be injected here by JS -->
+                    </div>
+                </div>
+                
                 <!-- Station Details Card (Floating over map) -->
                 <div id="sidebar" class="station-card glass-panel hidden">
                     <div class="card-header">
                         <p class="subtitle">Belfast Bikes AI</p>
-                        <button id="close-sidebar" class="close-btn" aria-label="Close">...</button>
+                        <div>
+                            <button id="fav-star-btn" class="fav-star-btn" aria-label="Favourite">☆</button>
+                            <button id="close-sidebar" class="close-btn" aria-label="Close">✕</button>
+                        </div>
                     </div>
                     
                     <h2 id="station-name">VICTORIA SQUARE STATION</h2>
