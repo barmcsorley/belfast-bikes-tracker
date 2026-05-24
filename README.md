@@ -18,12 +18,12 @@ This application is split into a **FastAPI backend** (which feeds the ML model a
 
 ```mermaid
 graph TD
-    subgraph Beryl GBFS Feed (Live API)
+    subgraph BerylFeed [Beryl GBFS Feed]
         B1[station_information.json] -->|Station Meta & Capacities| BE[FastAPI Backend]
         B2[station_status.json] -->|Real-time Bike & Dock Counts| BE
     end
 
-    subgraph Backend Services
+    subgraph BackendServices [Backend Services]
         BE -->|Fallback Data| FBL[Local JSON Backup]
         BE -->|Training Engine| ME[Model Trainer]
         ME -->|Historical Heuristic Patterns| TS[Synthetic Generator]
@@ -31,7 +31,7 @@ graph TD
         BE -->|Hourly Forecast API| RF
     end
 
-    subgraph Web App Frontend
+    subgraph WebApp [Web App Frontend]
         FE[Leaflet Map Dashboard] -->|AJAX Fetch /stations| BE
         FE -->|AJAX Fetch /history| BE
         FE -->|Draw Live Markers| MAP[Interactive Leaflet Map]
