@@ -384,16 +384,57 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         const text = link.textContent.trim();
         document.getElementById('favourites-panel').classList.add('hidden');
         document.getElementById('weather-overlay').classList.add('hidden');
+        document.getElementById('analytics-selector').classList.add('hidden');
 
         if (text.includes('Favourites')) {
             renderFavourites();
             document.getElementById('favourites-panel').classList.remove('hidden');
+            document.getElementById('sidebar').classList.add('hidden');
         } else if (text.includes('Weather')) {
             document.getElementById('weather-overlay').classList.remove('hidden');
+            document.getElementById('sidebar').classList.add('hidden');
+        } else if (text.includes('Analytics')) {
+            document.getElementById('analytics-selector').classList.remove('hidden');
+            document.getElementById('sidebar').classList.remove('hidden');
+            
+            // Populate dropdown if empty
+            const dropdown = document.getElementById('station-dropdown');
+            if (dropdown.children.length === 0) {
+                Object.values(stationCache).sort((a, b) => a.name.localeCompare(b.name)).forEach(station => {
+                    const option = document.createElement('option');
+                    option.value = station.id;
+                    option.textContent = station.name;
+                    dropdown.appendChild(option);
+                });
+                
+                // Select Sandown Road or first station
+                const sandown = Object.values(stationCache).find(s => s.name.includes("Sandown Road"));
+                if (sandown) {
+                    dropdown.value = sandown.id;
+                    selectStation(sandown);
+                } else if (dropdown.options.length > 0) {
+                    const firstId = dropdown.options[0].value;
+                    const firstStation = stationCache[firstId];
+                    selectStation(firstStation);
+                }
+            }
         } else if (!text.includes('Map')) {
             alert(text + " module is currently under active development and will be available soon!");
+        } else {
+            // Map
+            document.getElementById('sidebar').classList.add('hidden');
         }
     });
+});
+
+document.getElementById('station-dropdown').addEventListener('change', (e) => {
+    const stationId = e.target.value;
+    if (stationCache[stationId]) {
+        selectStation(stationCache[stationId]);
+        
+        // Pan map to station
+        map.setView([stationCache[stationId].lat, stationCache[stationId].lon], 15);
+    }
 });
 
 document.getElementById('close-favourites').addEventListener('click', () => {

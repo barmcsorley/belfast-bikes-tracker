@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="style.css?v=12">
+    <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
     <div class="dashboard-container">
@@ -90,6 +90,13 @@
                         </div>
                     </div>
                     
+                    <div id="analytics-selector" class="hidden" style="margin-bottom: 15px;">
+                        <label for="station-dropdown" style="display:block; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px;">Select Station for Analytics:</label>
+                        <select id="station-dropdown" style="width: 100%; padding: 10px; border-radius: 6px; background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); outline: none;">
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+
                     <h2 id="station-name">VICTORIA SQUARE STATION</h2>
                     <p class="station-subtitle">Belfast Bikes AI / <span id="station-subname">Victoria Square</span></p>
 
@@ -103,6 +110,9 @@
                             <span id="current-bikes" class="value">6</span>
                             <span class="slash">/</span>
                             <span id="capacity-display" class="capacity">8 bikes available</span>
+                        </div>
+                        <div class="status-numbers-breakdown" style="font-size: 0.9rem; color: #a1a1aa; margin-top: 5px; margin-bottom: 10px;">
+                            Pedal: <strong id="current-pedal" style="color: white;">6</strong> | E-Bikes: <strong id="current-electric" style="color: #a855f7;">0</strong>
                         </div>
                         <div class="status-footer">
                             <span class="next-bike">Next Bike Due: <strong>10 mins</strong></span>
@@ -136,11 +146,12 @@
                     
                     <!-- Hidden elements required by JS but not shown in this mock design -->
                     <div style="display: none;">
-                        <span id="current-pedal"></span>
-                        <span id="current-electric"></span>
                         <span id="predicted-bikes"></span>
                         <span id="predicted-pedal"></span>
                         <span id="predicted-electric"></span>
+                        <span id="current-docks"></span>
+                        <span id="confidence-text"></span>
+                        <div id="confidence-fill"></div>
                     </div>
                 </div>
             </div>
@@ -149,6 +160,6 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="app.js?v=12"></script>
+    <script src="app.js?v=13"></script>
 </body>
 </html>
