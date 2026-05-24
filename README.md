@@ -45,12 +45,15 @@ graph TD
 ## ✨ Features
 
 *   **🗺️ Interactive Live Map**: View all 60+ active Belfast Bike stations rendered on a custom CartoDB dark-mode map using Leaflet.js.
-*   **🟢 Color-Coded Markers**: Stations are dynamically color-coded based on live bike availability:
+*   **📍 Live Location Tracking**: Automatically finds and marks your current location on the map with a pulsating blue dot (requires HTTPS).
+*   **⚡ Electric Bike Detection**: Stations with available electric bikes are badged with a tiny lightning icon for quick scanning.
+*   **🟢 Color-Coded Markers**: Stations are dynamically color-coded based on total bike availability:
     *   **High (Green)**: 6+ bikes available.
     *   **Medium (Sky Blue)**: 3-5 bikes available.
-    *   **Critical (Pulsing Red)**: 0-2 bikes remaining (notifying commuters of low stock).
-*   **📊 Double-Line Trend Chart**: Select any station to view a beautiful Chart.js visualization combining **actual past 24-hour availability** and **future 12-hour predictions**.
-*   **🎛️ Forecast Simulation Slider**: Scrub through a slider (from +1h to +12h) to get a granular prediction of bike counts for any future hour.
+    *   **Critical (Pulsing Red)**: 0-2 bikes remaining.
+*   **🚲 Detailed Breakdown**: Clicking any station reveals the exact split of **Pedal vs Electric** bikes available.
+*   **📊 Double-Line Trend Chart**: View a beautiful Chart.js visualization plotting separate trend lines for Pedal and Electric bikes, combining **actual past 24-hour availability** and **future 12-hour predictions**.
+*   **🎛️ Forecast Simulation Slider**: Scrub through a slider (from +1h to +12h) to get a granular prediction of both bike types for any future hour.
 *   **🔋 Offline Resiliency**: The backend dynamically queries Beryl's live GBFS feeds but seamlessly falls back to local data and predictions if the external API is offline.
 *   **📱 Glassmorphism Dark UI**: A gorgeous responsive layout utilizing CSS backdrop filters, modern gradients, and smooth slide-in animations.
 
@@ -75,40 +78,29 @@ The model is trained on:
 *   `temperature`: Temperature in Celsius.
 *   `is_raining`: Flag for rain (0 or 1).
 
-On server startup, the backend automatically trains/fits the model. Requests for future predictions feed the target hour, weekday, temperature, and rain status into the random forest regressor to output the predicted number of bikes.
+The model predicts a **multi-output target**: both pedal bike availability and electric bike availability. On server startup, the backend automatically generates mock training data simulating realistic electric bike distribution (approx 20% of fleets) and fits the model. Requests for future predictions feed the target hour, weekday, temperature, and rain status into the Random Forest regressor to output the predicted breakdown.
 
 ---
 
-## 🚀 Setup & Installation
+## 🚀 Setup & Installation (Dockerized)
 
-### Backend Setup (FastAPI)
+The application is fully containerized so you can run the unified backend/frontend server effortlessly in one go!
 
-1.  **Navigate to backend directory**:
+1.  **Clone the repository**:
     ```bash
-    cd backend
+    git clone https://github.com/barmcsorley/belfast-bikes-tracker.git
+    cd belfast-bikes-tracker
     ```
 
-2.  **Create and activate a virtual environment**:
+2.  **Start the container**:
     ```bash
-    python3 -m venv venv
-    source venv/bin/activate
+    docker compose up -d --build
     ```
 
-3.  **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
+3.  **Access the App**:
+    Open your browser and navigate to `http://localhost:8008` (or your remote server's IP address).
 
-4.  **Run the development server**:
-    ```bash
-    uvicorn main:app --reload --port 8000
-    ```
-    The API will start running at `http://127.0.0.1:8000`.
-
-### Frontend Setup
-
-1.  **Serve or open the frontend**:
-    Simply open the `frontend/index.html` file directly in any modern browser, or serve it using a lightweight local server (e.g. `npx serve frontend` or VS Code Live Server).
+*(Note: The first time the container boots, it takes ~15 seconds to generate the massive synthetic ML dataset and train the Random Forest. The web interface will respond over port 8008 immediately after training completes).*
 
 ---
 
