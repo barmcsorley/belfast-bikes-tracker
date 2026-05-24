@@ -358,3 +358,20 @@ input[type=range] { width: 100%; accent-color: var(--accent-cyan); height: 4px; 
 }
 .fav-star-btn:hover { transform: scale(1.1); }
 .fav-star-btn.active { color: #f59e0b; text-shadow: 0 0 10px rgba(245, 158, 11, 0.5); }
+
+/* --- WEATHER OVERLAY --- */
+.weather-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background: var(--bg-dark);
+    transition: opacity 0.3s, transform 0.4s;
+}
+.weather-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+}

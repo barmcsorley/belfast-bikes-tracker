@@ -384,13 +384,15 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         li.classList.add('active');
 
         const text = link.textContent.trim();
-        if (text.includes('Map')) {
-            document.getElementById('favourites-panel').classList.add('hidden');
-        } else if (text.includes('Favourites')) {
+        document.getElementById('favourites-panel').classList.add('hidden');
+        document.getElementById('weather-overlay').classList.add('hidden');
+
+        if (text.includes('Favourites')) {
             renderFavourites();
             document.getElementById('favourites-panel').classList.remove('hidden');
-        } else {
-            document.getElementById('favourites-panel').classList.add('hidden');
+        } else if (text.includes('Weather')) {
+            document.getElementById('weather-overlay').classList.remove('hidden');
+        } else if (!text.includes('Map')) {
             alert(text + " module is currently under active development and will be available soon!");
         }
     });
@@ -398,6 +400,10 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 
 document.getElementById('close-favourites').addEventListener('click', () => {
     document.getElementById('favourites-panel').classList.add('hidden');
+});
+
+document.getElementById('close-weather').addEventListener('click', () => {
+    document.getElementById('weather-overlay').classList.add('hidden');
 });
 
 // --- Search and Favourites Logic ---
