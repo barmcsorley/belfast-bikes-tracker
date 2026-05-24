@@ -355,3 +355,25 @@ document.getElementById('hour-slider').addEventListener('input', (e) => {
     document.getElementById('hour-display').textContent = `+${val}h`;
     updatePrediction(val);
 });
+
+// Navigation logic for the sidebar tabs
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const li = link.parentElement;
+        
+        // Remove active class from all tabs
+        document.querySelectorAll('.nav-links li').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // Add active class to the clicked tab
+        li.classList.add('active');
+
+        // Show mock alert if clicking something other than the Map
+        const text = link.textContent.trim();
+        if (!text.includes('Map')) {
+            alert(text + " module is currently under active development and will be available soon!");
+        }
+    });
+});
